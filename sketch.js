@@ -1,8 +1,8 @@
 let startButton;
 let gameStarted = false;
 let player1;
-let leftX, rightX;
-let leftY, rightY;
+let leftX, leftY;
+let rightX, rightY;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -13,9 +13,9 @@ function setup() {
   startButton.mousePressed(startGame);
   startButton.class('start-button');
 
-  leftX = 50;        
-  rightX = width - 50;
+  leftX = 50;
   leftY = height / 2;
+  rightX = width - 50;
   rightY = height / 2;
 }
 
@@ -38,8 +38,23 @@ function setup() {
 
   function draw() {
     if (gameStarted == true) {
-      background(25, 20, 23);
-      drawLeftPaddle(leftX, mouseY);
+      background(25, 20, 23); 
+      drawLeftPaddle(leftX, leftY);
       drawRightPaddle(rightX, rightY);
+
+    if (keyIsDown(87)) {
+      leftY -= 10;
+    }
+    if (keyIsDown(83)) {
+      leftY += 10;
+    }
+
+    if (keyIsDown(UP_ARROW)) {
+      rightY -= 10;
+    }
+    if (keyIsDown(DOWN_ARROW)) {
+      rightY += 10;
+    }
+
     }
   }
