@@ -26,3 +26,7 @@ canvas {
 
   cursor: pointer;
 }
+
+.start-button:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}

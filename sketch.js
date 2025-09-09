@@ -1,3 +1,9 @@
+let startButton;
+let gameStarted = false;
+let player1;
+let leftX, rightX;
+let leftY, rightY;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(25, 20, 23);
@@ -6,17 +12,12 @@ function setup() {
   startButton.position(width / 2, height / 2);
   startButton.mousePressed(startGame);
   startButton.class('start-button');
+
   leftX = 50;        
   rightX = width - 50;
   leftY = height / 2;
   rightY = height / 2;
 }
-
-  let startButton;
-  let gameStarted = false;
-  let player1;
-  let leftX, rightX;
-  let leftY, rightY;
 
   function startGame() {
     gameStarted = true;
