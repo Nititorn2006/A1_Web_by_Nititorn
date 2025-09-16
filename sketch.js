@@ -13,6 +13,9 @@ function setup() {
   ballX = width / 2;
   ballY = height / 2;
 
+  ballSpeedX = random([-5, 5]);
+  ballSpeedY = random([-5, -4, -3, 3, 4, 5]);
+
 
   startButton = createButton('START');
   startButton.position(width / 2, height / 2);
@@ -44,21 +47,20 @@ function setup() {
 
   function drawBoarder() {
     stroke(100);
-    line(0 + 20, 0 + 20, 0 + 20, windowHeight - 20); // Left border
-    line(0 + 20, windowHeight - 20, windowWidth - 20, windowHeight - 20); // Bottom border
-    line(windowWidth - 20, windowHeight - 20, windowWidth - 20, 0 + 20); // Right border
-    line(windowWidth - 20, 0 + 20, 0 + 20, 0 + 20); // Top border
+    line(0 + 20, 0 + 20, 0 + 20, windowHeight - 20); 
+    line(0 + 20, windowHeight - 20, windowWidth - 20, windowHeight - 20);
+    line(windowWidth - 20, windowHeight - 20, windowWidth - 20, 0 + 20);
+    line(windowWidth - 20, 0 + 20, 0 + 20, 0 + 20);
   }
 
   function leftPaddleHitBoarder() {
     if (leftY - 50 <= 20) {
       leftY = 70;
 
-      // Draw and move the ball
       drawBall();
       ballX += ballSpeedX;
       ballY += ballSpeedY;
-      // Ball bounces off top and bottom walls
+      
       if (ballY - 10 <= 20 || ballY + 10 >= height - 20) {
         ballSpeedY = -ballSpeedY;
       }
@@ -89,12 +91,12 @@ function setup() {
 
   function checkBallCollision() {
     if (ballX - 10 <= leftX + 5 && ballY >= leftY - 50 && ballY <= leftY + 50) {
-      ballSpeedX = -ballSpeedX;
-      ballSpeedY += random(-2, 2); // Add small random change to Y speed
+      ballSpeedX = -ballSpeedX * 1.1; 
+      ballSpeedY += random(-2, 2);
     }
     if (ballX + 10 >= rightX - 5 && ballY >= rightY - 50 && ballY <= rightY + 50) {
-      ballSpeedX = -ballSpeedX;
-      ballSpeedY += random(-2, 2); // Add small random change to Y speed
+      ballSpeedX = -ballSpeedX * 1.1; 
+      ballSpeedY += random(-2, 2);
     }
   }
 
@@ -120,21 +122,21 @@ function setup() {
 
       if (ballX + 20 >= width - 20) {
         player1Score += 1;
-        // Reset ball to center, but slightly offset to avoid immediate re-score
-        ballX = width / 2 - 30;
+        
+        ballX = width / 2;
         ballY = height / 2;
-        // Randomize ball direction, always moving left
-        ballSpeedX = -max(4, abs(ballSpeedX));
+        
+        ballSpeedX = random([-5, 5]);
         ballSpeedY = random([-5, -4, -3, 3, 4, 5]);
       }
 
       if (ballX - 20 <= 20) {
-          player2Score += 1;
-        // Reset ball to center, but slightly offset to avoid immediate re-score
-        ballX = width / 2 + 30;
+        player2Score += 1;
+        
+        ballX = width / 2;
         ballY = height / 2;
-        // Randomize ball direction, always moving right
-        ballSpeedX = max(4, abs(ballSpeedX));
+        
+        ballSpeedX = random([-5, 5]);
         ballSpeedY = random([-5, -4, -3, 3, 4, 5]);
       }
 
@@ -144,7 +146,7 @@ function setup() {
       drawBall();
       ballX += ballSpeedX;
       ballY += ballSpeedY;  
-      // Ball bounces off top and bottom walls with small random change
+      
       if (ballY - 10 <= 20 || ballY + 10 >= height - 20) {
         ballSpeedY = -ballSpeedY;
         ballSpeedY += random(-2, 2);
